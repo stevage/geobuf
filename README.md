@@ -104,6 +104,19 @@ Note that for big files, `geobuf2json` command can be pretty slow, but the bottl
 but the native `JSON.stringify` on the decoded object to pipe it as a string to `stdout`.
 On some files, this step may take 40 times more time than actual decoding.
 
+## Node
+
+```js
+const geobuf = require('geobuf');
+const PBF = require('pbf');
+
+function jsonToGeoBuf(json, filename) {
+    const pbf = geobuf.encode(json, new PBF());
+    const out = fs.createWriteStream(filename);
+    out.write(Buffer.from(pbf));
+    out.end();
+}
+```
 
 ## See Also
 
